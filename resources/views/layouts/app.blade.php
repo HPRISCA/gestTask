@@ -29,7 +29,8 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+            <h1>Bienvenue sur le tableau de bord</h1>
+    <!-- Ton contenu ici -->
             </main>
         </div>
     </body>
