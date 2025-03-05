@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
         {
            
@@ -18,84 +16,62 @@ class TaskController extends Controller
             return view('tasks.index', compact('tasks'));
         } 
     
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('tasks.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        
         $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
         ]);
-
-        Auth::user()->tasks()->create($request->all());
+    
+        Auth::user()->tasks()->create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => 'pending',
+        ]);
+    
         return redirect()->route('tasks.index')->with('success', 'Tâche ajoutée avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        $task = Task::findOrFail($id); 
         return view('tasks.edit', compact('task'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable',
         ]);
-
+        $task = Task::findOrFail($id); 
         $task->update($request->all());
         return redirect()->route('tasks.index')->with('success', 'Tâche mise à jour.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function complete($id)
+    {
+    $task = Task::findOrFail($id);
+    $task->status = 'completed'; 
+    $task->save(); 
+
+    return redirect()->route('tasks.index')->with('success', 'Tâche complétée avec succès.');
+    }
+
     public function destroy($id)
     {
-        $task->delete();
+        $task = Task::findOrFail($id); 
+        $task->delete(); 
         return redirect()->route('tasks.index')->with('success', 'Tâche supprimée.');
     }
 }
