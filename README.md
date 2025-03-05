@@ -1,3 +1,68 @@
+
+
+Ce projet est une application de gestion des tâches où les utilisateurs peuvent ajouter, modifier, supprimer et marquer les tâches comme complètes. Il est construit avec Laravel, un framework PHP populaire, et utilise une base de données MySQL pour stocker les informations.
+
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre machine :
+
+- [PHP](https://www.php.net/downloads) (version 7.4 ou supérieure)
+- [Composer](https://getcomposer.org/download/) pour la gestion des dépendances PHP
+- [MySQL](https://www.mysql.com/downloads/) ou une autre base de données compatible (si tu utilises un autre SGBD, assure-toi de bien adapter la configuration)
+- [Node.js](https://nodejs.org/en/) et [npm](https://www.npmjs.com/) pour gérer les dépendances JavaScript
+- [Git](https://git-scm.com/downloads) pour la gestion du code source
+- [Laravel](https://laravel.com/) (si tu utilises Laravel pour ce projet)
+
+## Installation
+# Installez les dépendances PHP
+Accédez au répertoire du projet et installez les dépendances avec Composer :
+
+cd votre-projet-gestion-taches
+composer install
+# Configurez la base de données
+Créez une base de données pour l'application et configurez-la dans le fichier .env à la racine du projet.
+Copiez le fichier .env.example en .env
+cp .env.example .env
+
+# Modifiez les paramètres de connexion à la base de données dans .env :
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nom_de_votre_base_de_donnees
+DB_USERNAME=votre_utilisateur
+DB_PASSWORD=votre_mot_de_passe
+
+# Exécutez les migrations et les seeders
+php artisan migrate
+php artisan db:seed
+
+# Installez les dépendances JavaScript (optionnel)
+npm install
+
+# Lancer le serveur de développement
+http://localhost:8000
+php artisan serve
+
+# Fonctionnalités
+Ajout de tâches : Ajoutez de nouvelles tâches avec un titre et une description.
+Modification des tâches : Modifiez une tâche existante en modifiant son titre et sa description.
+Suppression des tâches : Supprimez une tâche de la liste.
+Marquage des tâches : Changez le statut d'une tâche entre "En attente" et "Complétée".
+Affichage des tâches : Affichez la liste des tâches avec leur statut.
+
+# Tests
+php artisan test
+
+
+
+### Clonez le repository
+
+Clonez ce projet sur votre machine locale à l'aide de Git :
+
+```bash
+git clone https://github.com/votre-utilisateur/gestTask.git
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
